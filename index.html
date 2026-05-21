@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArcadeGames + Projetos Web I</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">🎮 ArcadeGames</span>
+    <div class="nav-sep"></div>
+    <span class="nav-group-label">Arcade</span>
+    <button class="nav-btn" onclick="showPage('home-arcade')">Início</button>
+    <button class="nav-btn" onclick="showPage('jokenpo')">✊ Jokenpô</button>
+    <button class="nav-btn" onclick="showPage('moeda')">🪙 Moeda</button>
+    <button class="nav-btn" onclick="showPage('dados')">🎲 Dados</button>
+    <div class="nav-sep"></div>
+    <span class="nav-group-label">Web I</span>
+    <button class="nav-btn" onclick="showPage('home-proj')">Projetos</button>
+    <button class="nav-btn" onclick="showPage('luz')">💡 Luz</button>
+    <button class="nav-btn" onclick="showPage('cofre')">🐷 Cofre</button>
+    <button class="nav-btn" onclick="showPage('pomodoro')">⏱ Pomodoro</button>
+    <button class="nav-btn" onclick="showPage('teclado')">🎹 Teclado</button>
+  </div>
+</nav>
+
+<!-- ===================== HOME ARCADE ===================== -->
+<div id="home-arcade" class="page active">
+  <div class="home-hero">
+    <span class="badge-pill">🎮 ArcadeGames · Mini Games</span>
+    <h1>Escolha Seu Jogo</h1>
+    <p>Três mini games feitos com JavaScript puro. Cada um com IA, histórico e estatísticas em tempo real.</p>
+  </div>
+  <p class="section-title">Games disponíveis</p>
+  <div class="cards-grid">
+    <div class="home-card c-arcade" onclick="showPage('jokenpo')">
+      <span class="card-icon">✊</span>
+      <h3>Jokenpô</h3>
+      <p>Pedra, papel ou tesoura contra uma IA que aprende seus padrões.</p>
+      <span class="card-tag">IA Adaptativa</span>
+    </div>
+    <div class="home-card c-arcade" onclick="showPage('moeda')">
+      <span class="card-icon">🪙</span>
+      <h3>Cara ou Coroa</h3>
+      <p>Teste sua sorte e acompanhe sua taxa de acerto ao longo do tempo.</p>
+      <span class="card-tag">Estatísticas</span>
+    </div>
+    <div class="home-card c-arcade" onclick="showPage('dados')">
+      <span class="card-icon">🎲</span>
+      <h3>Dados</h3>
+      <p>Lance 1, 2 ou 3 dados e veja quem tira a maior pontuação.</p>
+      <span class="card-tag">3 Modos</span>
+    </div>
+  </div>
+  <p class="section-title">Projetos Web I</p>
+  <div class="cards-grid">
+    <div class="home-card c-proj" onclick="showPage('luz')">
+      <span class="card-icon">💡</span>
+      <h3>Controle de Luz</h3>
+      <p>DOM, eventos e classList.toggle()</p>
+      <span class="card-tag pink">Projeto 01</span>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('cofre')">
+      <span class="card-icon">🐷</span>
+      <h3>Cofrinho Digital</h3>
+      <p>Variáveis, moedas e localStorage</p>
+      <span class="card-tag pink">Projeto 02</span>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('pomodoro')">
+      <span class="card-icon">⏱️</span>
+      <h3>Pomodoro Timer</h3>
+      <p>setInterval, clearInterval e foco</p>
+      <span class="card-tag pink">Projeto 03</span>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('teclado')">
+      <span class="card-icon">🎹</span>
+      <h3>Teclado Musical</h3>
+      <p>Web Audio API e eventos de teclado</p>
+      <span class="card-tag pink">Projeto 04</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== JOKENPÔ ===================== -->
+<div id="jokenpo" class="page">
+  <div class="page-header">
+    <span class="tag">Arcade · IA Adaptativa</span>
+    <h2>Jokenpô</h2>
+    <p>A IA analisa seus padrões e tenta contra-atacar. Consegue enganá-la?</p>
+  </div>
+  <div class="card">
+    <div class="ia-badge">🧠 IA com aprendizado de padrão ativo</div>
+    <div class="jokenpo-btns">
+      <button class="jk-btn" onclick="jogarJokenpo('Pedra')"><span class="jk-emoji">✊</span>Pedra</button>
+      <button class="jk-btn" onclick="jogarJokenpo('Papel')"><span class="jk-emoji">✋</span>Papel</button>
+      <button class="jk-btn" onclick="jogarJokenpo('Tesoura')"><span class="jk-emoji">✌️</span>Tesoura</button>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-label">Você</div><div class="stat-value" id="jk-pw">0</div></div>
+    <div class="stat-box"><div class="stat-label">CPU</div><div class="stat-value" id="jk-cw" style="color:var(--neon-cyan)">0</div></div>
+    <div class="stat-box"><div class="stat-label">Empates</div><div class="stat-value lilac" id="jk-ties">0</div></div>
+    <div class="stat-box"><div class="stat-label">Winrate</div><div class="stat-value" id="jk-wr">0%</div></div>
+    <div class="stat-box"><div class="stat-label">Streak</div><div class="stat-value lilac" id="jk-str">0</div></div>
+  </div>
+  <div id="jk-resultado"></div>
+  <div id="jk-history"></div>
+  <div class="mt-md flex gap-sm">
+    <button class="btn btn-danger" onclick="resetJokenpo()">↺ Resetar</button>
+    <button class="btn btn-ghost" onclick="showPage('home-arcade')">← Voltar</button>
+  </div>
+</div>
+
+<!-- ===================== MOEDA ===================== -->
+<div id="moeda" class="page">
+  <div class="page-header">
+    <span class="tag">Arcade · Sorte</span>
+    <h2>Cara ou Coroa</h2>
+    <p>Escolha seu lado e veja se a sorte está do seu lado.</p>
+  </div>
+  <div class="card">
+    <div class="coin-choices">
+      <button class="coin-choice-btn cara-btn" onclick="jogarMoeda('Cara')">
+        <span class="coin-emoji">😀</span>Cara
+      </button>
+      <button class="coin-choice-btn coroa-btn" onclick="jogarMoeda('Coroa')">
+        <span class="coin-emoji">👑</span>Coroa
+      </button>
+    </div>
+  </div>
+  <div id="moeda-resultado"></div>
+  <div class="stats-row mt-sm">
+    <div class="stat-box"><div class="stat-label">Acertos</div><div class="stat-value" id="m-acertos">0</div></div>
+    <div class="stat-box"><div class="stat-label">Total</div><div class="stat-value lilac" id="m-total">0</div></div>
+    <div class="stat-box"><div class="stat-label">Precisão</div><div class="stat-value" id="m-prec" style="color:var(--neon-cyan)">0%</div></div>
+    <div class="stat-box"><div class="stat-label">Melhor seq.</div><div class="stat-value lilac" id="m-best">0</div></div>
+  </div>
+  <div id="moeda-history"></div>
+  <div class="mt-md flex gap-sm">
+    <button class="btn btn-danger" onclick="resetMoeda()">↺ Resetar</button>
+    <button class="btn btn-ghost" onclick="showPage('home-arcade')">← Voltar</button>
+  </div>
+</div>
+
+<!-- ===================== DADOS ===================== -->
+<div id="dados" class="page">
+  <div class="page-header">
+    <span class="tag">Arcade · 3 Modos</span>
+    <h2>Dados</h2>
+    <p>Escolha quantos dados lançar e dispute com a máquina.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">Modo de jogo</div>
+    <div class="dice-mode-row">
+      <button class="mode-pill active" id="dm-single" onclick="changeDiceMode('single',this)">1 Dado</button>
+      <button class="mode-pill" id="dm-double" onclick="changeDiceMode('double',this)">2 Dados</button>
+      <button class="mode-pill" id="dm-triple" onclick="changeDiceMode('triple',this)">3 Dados</button>
+    </div>
+    <button class="btn btn-primary w-full" style="justify-content:center;font-size:1.05rem;padding:1rem;" onclick="rolarDados()">🎲 Rolar Dados</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-label">Você</div><div class="stat-value" id="d-pw">0</div></div>
+    <div class="stat-box"><div class="stat-label">CPU</div><div class="stat-value" style="color:var(--neon-cyan)" id="d-cw">0</div></div>
+    <div class="stat-box"><div class="stat-label">Empates</div><div class="stat-value lilac" id="d-ties">0</div></div>
+    <div class="stat-box"><div class="stat-label">Winrate</div><div class="stat-value" id="d-wr">0%</div></div>
+    <div class="stat-box"><div class="stat-label">Streak</div><div class="stat-value lilac" id="d-str">0</div></div>
+  </div>
+  <div id="dados-resultado"></div>
+  <div id="dados-history"></div>
+  <div class="mt-md flex gap-sm">
+    <button class="btn btn-danger" onclick="resetDados()">↺ Resetar</button>
+    <button class="btn btn-ghost" onclick="showPage('home-arcade')">← Voltar</button>
+  </div>
+</div>
+
+<!-- ===================== HOME PROJETOS ===================== -->
+<div id="home-proj" class="page">
+  <div class="home-hero">
+    <span class="badge-pill">📚 Programação Web I · 2025</span>
+    <h1>Projetos Avaliativos</h1>
+    <p>Quatro projetos com DOM, eventos, variáveis e APIs do navegador — tudo sem frameworks.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="home-card c-proj" onclick="showPage('luz')">
+      <span class="card-num">Projeto 01</span>
+      <span class="card-icon">💡</span>
+      <h3>Controle de Luz</h3>
+      <p>Interruptor digital com efeito de brilho, mudança de ambiente e contador.</p>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('cofre')">
+      <span class="card-num">Projeto 02</span>
+      <span class="card-icon">🐷</span>
+      <h3>Cofrinho Digital</h3>
+      <p>Moedas, saque com validação e saldo salvo no localStorage.</p>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('pomodoro')">
+      <span class="card-num">Projeto 03</span>
+      <span class="card-icon">⏱️</span>
+      <h3>Pomodoro Timer</h3>
+      <p>Timer com setInterval, modos de foco/pausa e sons de alerta.</p>
+    </div>
+    <div class="home-card c-proj" onclick="showPage('teclado')">
+      <span class="card-num">Projeto 04</span>
+      <span class="card-icon">🎹</span>
+      <h3>Teclado Musical</h3>
+      <p>Web Audio API, gravação de sequências e reprodução fiel.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== P1 LUZ ===================== -->
+<div id="luz" class="page">
+  <div class="page-header">
+    <span class="tag">Projeto 01 · DOM &amp; classList</span>
+    <h2>Controle de Luz</h2>
+    <p>Clique para ligar e desligar. O ambiente muda junto com a lâmpada.</p>
+  </div>
+  <div id="lightCard" class="light-card">
+    <div class="room-bg"></div>
+    <div class="lamp-wrap"><div class="lamp-glow"></div><span class="lamp-emoji">💡</span></div>
+    <span id="lightStatus" class="light-status status-off">● Desligada</span>
+    <button id="lightBtn" class="btn btn-primary" style="position:relative;z-index:1" onclick="toggleLight()">Ligar</button>
+  </div>
+  <div class="grid-3 mt-sm">
+    <div class="stat-box"><div class="stat-label">Vezes acesa</div><div class="stat-value" id="lightCount">0</div></div>
+    <div class="stat-box"><div class="stat-label">Estado</div><div class="stat-value" id="lightState" style="font-size:1rem;padding-top:0.5rem">OFF</div></div>
+    <div class="stat-box"><div class="stat-label">Última ação</div><div class="stat-value" id="lightTime" style="font-size:0.9rem;padding-top:0.6rem">–</div></div>
+  </div>
+  <div class="code-hint mt-sm"><strong class="hl">Como funciona:</strong> O botão usa <code>classList.toggle()</code> para adicionar/remover <code>.lamp-on</code> no card. Isso ativa transições CSS que mudam fundo, brilho e estado dos filhos — sem JS extra nas animações!</div>
+  <div class="mt-sm"><button class="btn btn-ghost" onclick="showPage('home-proj')">← Projetos</button></div>
+</div>
+
+<!-- ===================== P2 COFRE ===================== -->
+<div id="cofre" class="page">
+  <div class="page-header">
+    <span class="tag">Projeto 02 · localStorage &amp; Intl</span>
+    <h2>Cofrinho Digital</h2>
+    <p>Adicione moedas, saque e esvazie. Saldo salvo no navegador!</p>
+  </div>
+  <div class="card text-center">
+    <span id="cofreEmoji" class="cofre-emoji">🐷</span>
+    <div class="mt-sm"><div class="stat-label">Saldo atual</div><div class="total-display" id="totalDisplay">R$ 0,00</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Adicionar moedas</div>
+    <div class="coin-grid">
+      <button class="coin-btn" onclick="addCoin(0.10)">+R$0,10</button>
+      <button class="coin-btn" onclick="addCoin(0.25)">+R$0,25</button>
+      <button class="coin-btn" onclick="addCoin(0.50)">+R$0,50</button>
+      <button class="coin-btn" onclick="addCoin(1.00)">+R$1,00</button>
+    </div>
+    <div class="card-title">Contagem por moeda</div>
+    <div class="coin-counts">
+      <div class="coin-count"><div class="cc-label">R$0,10</div><div class="cc-val" id="cnt10">0</div></div>
+      <div class="coin-count"><div class="cc-label">R$0,25</div><div class="cc-val" id="cnt25">0</div></div>
+      <div class="coin-count"><div class="cc-label">R$0,50</div><div class="cc-val" id="cnt50">0</div></div>
+      <div class="coin-count"><div class="cc-label">R$1,00</div><div class="cc-val" id="cnt100">0</div></div>
+    </div>
+    <div class="card-title">Sacar valor</div>
+    <div class="saque-row">
+      <input type="number" id="saqueInput" min="0" step="0.01" placeholder="Valor do saque (ex: 1.50)">
+      <button class="btn btn-success" onclick="sacar()">Sacar</button>
+      <button class="btn btn-danger" onclick="esvaziar()">Esvaziar</button>
+    </div>
+    <div id="alertMsg" class="alert-msg"></div>
+  </div>
+  <div class="code-hint"><strong class="hl">Como funciona:</strong> Saldo armazenado com <code>localStorage</code> — persiste ao recarregar. <code>Intl.NumberFormat</code> formata o total em reais. O emoji evolui: 🐷 → 💰 → 🤑 → 💎</div>
+  <div class="mt-sm"><button class="btn btn-ghost" onclick="showPage('home-proj')">← Projetos</button></div>
+</div>
+
+<!-- ===================== P3 POMODORO ===================== -->
+<div id="pomodoro" class="page">
+  <div class="page-header">
+    <span class="tag">Projeto 03 · setInterval &amp; clearInterval</span>
+    <h2>Pomodoro Timer</h2>
+    <p>25 minutos de foco total. Pause quando precisar, redefina para recomeçar.</p>
+  </div>
+  <div class="card">
+    <div class="timer-mode-btns">
+      <button class="mode-btn active" id="modeFoco" onclick="setMode('foco')">🍅 Foco</button>
+      <button class="mode-btn" id="modeCurta" onclick="setMode('curta')">☕ Pausa curta</button>
+      <button class="mode-btn" id="modeLonga" onclick="setMode('longa')">🌙 Pausa longa</button>
+    </div>
+    <div class="timer-circle-wrap">
+      <svg class="timer-svg" width="210" height="210" viewBox="0 0 210 210">
+        <defs><linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f472b6"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
+        <circle class="timer-track" cx="105" cy="105" r="92" fill="none" stroke-width="9"/>
+        <circle class="timer-progress" id="timerProgress" cx="105" cy="105" r="92" fill="none" stroke-width="9" stroke-dasharray="578.05" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-display">
+        <div class="timer-time" id="timerDisplay">25:00</div>
+        <div class="timer-label-sm" id="timerModeName">FOCO</div>
+      </div>
+    </div>
+    <div class="sessions-dots" id="sessionsCount"></div>
+    <div class="timer-controls mt-md">
+      <button class="btn btn-primary" id="startBtn" onclick="startTimer()">▶ Iniciar</button>
+      <button class="btn btn-ghost" onclick="pauseTimer()">⏸ Pausar</button>
+      <button class="btn btn-ghost" onclick="resetTimer()">↺ Resetar</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Configurar tempos (minutos)</div>
+    <div class="pomodoro-config">
+      <div class="config-group"><label>⏱ Foco</label><input type="number" id="cfgFoco" value="25" min="1" max="90" onchange="updateConfig()"></div>
+      <div class="config-group"><label>☕ Pausa curta</label><input type="number" id="cfgCurta" value="5" min="1" max="30" onchange="updateConfig()"></div>
+      <div class="config-group"><label>🌙 Pausa longa</label><input type="number" id="cfgLonga" value="15" min="1" max="60" onchange="updateConfig()"></div>
+      <div class="config-group"><label>🍅 Sessões p/ pausa longa</label><input type="number" id="cfgSessoes" value="4" min="2" max="8" onchange="updateConfig()"></div>
+    </div>
+  </div>
+  <div class="code-hint"><strong class="hl">Técnica Pomodoro:</strong> 25 min foco → 5 min pausa → após 4 sessões, 15 min pausa longa. Usa <code>setInterval</code> para decrementar e <code>clearInterval</code> para pausar.</div>
+  <div class="mt-sm"><button class="btn btn-ghost" onclick="showPage('home-proj')">← Projetos</button></div>
+</div>
+
+<!-- ===================== P4 TECLADO ===================== -->
+<div id="teclado" class="page">
+  <div class="page-header">
+    <span class="tag">Projeto 04 · Web Audio API</span>
+    <h2>Teclado Musical</h2>
+    <p>Clique ou use as teclas A–L no teclado físico. Grave e reproduza!</p>
+  </div>
+  <div class="card">
+    <div class="piano-wrap"><div class="piano" id="piano"></div></div>
+    <div class="flex gap-md mt-sm" style="flex-wrap:wrap;align-items:center">
+      <div><div class="stat-label">Última nota</div><div class="last-note-display" id="lastNote">–</div></div>
+      <div style="flex:1;min-width:180px"><div class="stat-label" style="margin-bottom:0.35rem">Sequência</div><div class="seq-display" id="seqDisplay">Nenhuma nota ainda…</div></div>
+    </div>
+    <div class="piano-controls">
+      <button class="btn btn-primary" id="recordBtn" onclick="toggleRecord()">⏺ Gravar</button>
+      <button class="btn btn-success" onclick="playSequence()">▶ Reproduzir</button>
+      <button class="btn btn-ghost" onclick="clearSeq()">🗑 Limpar</button>
+    </div>
+  </div>
+  <div class="code-hint"><strong class="hl">Como funciona:</strong> Sons gerados pela <code>Web Audio API</code> — sem arquivos! Cada nota cria um <code>OscillatorNode</code> com frequência específica (Dó=261Hz, Ré=293Hz…). O modo gravação registra notas e intervalos para reprodução fiel.</div>
+  <div class="mt-sm"><button class="btn btn-ghost" onclick="showPage('home-proj')">← Projetos</button></div>
+</div>
+
+<script src="../js/script.js"></script>
+
+</body>
+</html>
