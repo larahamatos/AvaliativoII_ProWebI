@@ -106,11 +106,6 @@ Funcionalidades:
 * Animações CSS
 * Responsividade
 
----
-
-## 📸 Captura de tela
-
-Adicione aqui imagens ou GIFs do projeto funcionando.
 
 ---
 
@@ -122,12 +117,6 @@ Adicione aqui imagens ou GIFs do projeto funcionando.
 * [ ] Tema claro/escuro
 * [ ] Melhorias nas animações
 * [ ] Responsividade aprimorada
-
----
-
-## 🌐 GitHub Pages
-
-Adicione aqui o link do GitHub Pages depois de publicar o projeto.
 
 ---
 
