@@ -8,7 +8,7 @@ O site reúne mini games estilo arcade e os quatro projetos avaliativos da disci
 
 ## 👥 Integrantes
 
-* Coloque os nomes aqui
+* Larah Matos e Yasmin Vargas
 
 ---
 
